@@ -24,7 +24,7 @@ end
 users = {}
 
 # map of eventid -> event
-events = {}
+events = Event.fake_events
 
 # map from hashed fb id -> array of their created event ids
 user_created_events = {}
@@ -113,8 +113,8 @@ post '/events' do
 	else
 		id = events.keys.max + 1
 	end
-	events[id] = Event.new(params['creator_id'], params['name'], params['description'], params['lat'], 
-		params['lng'], params['start_time'], params['duration'], params['picture'], params['metadata'], [], [])
+	events[id] = Event.new(id, params['creator_id'], params['name'], params['description'], params['lat'], 
+		params['lng'], params['loc'], params['start_time'], params['duration'], params['picture'], params['metadata'], [], [])
 	"created event: #{events[id].to_json}"
 end
 
