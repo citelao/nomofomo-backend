@@ -161,6 +161,10 @@ end
 # exclude rejected, confirmed, interested, created
 # output: all other events ordered by magic or location
 get '/events' do
-	events.values
+result = []
+    events.values.each { |event|
+	   result.push(event.to_json)
+    }
+    result
 end
 
