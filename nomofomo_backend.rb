@@ -24,11 +24,7 @@ user_left_swipes = {}
 # map from hashed fb id -> array of their confirmed event ids
 user_confirmed_events = {}
 
-
-get '/hello/:name' do
-  # matches "GET /hello/foo" and "GET /hello/bar"
-  # params['name'] is 'foo' or 'bar'
-  "Hello #{params['name']}!"
+get '/hello' do
+  url = params[:url]
+  "Hello #{params}!"
 end
-
-
