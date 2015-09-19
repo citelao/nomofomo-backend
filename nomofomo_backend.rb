@@ -1,5 +1,8 @@
 require 'sinatra'
 require 'sinatra/cross_origin'
+require 'json'
+require './user'
+require './event'
 
 configure do
   enable :cross_origin
@@ -35,65 +38,41 @@ user_disliked_events = {}
 # map from hashed fb id -> array of their confirmed event ids
 user_confirmed_events = {}
 
-class User
-   def initialize(id, name, picture)
-      @user_id=id
-      @name=name
-      @picture=picture
-   end
-end
-
-class Event
-	def initialize(creator, name, description, lat, lng, start_time, 
-		duration, picture, metadata, interested_users, confirmed_users)
-		@creator=creator
-		@name=name
-		@description=description
-		@lat=lat
-		@lng=lng
-		@start_time=start_time
-		@duration=duration
-		@picture=picture
-		@metadata=metadata
-		@interested_users=interested_users
-		@confirmed_users=confirmed_users
-	end
-end
-
 get '/hello' do
   url = params[:url]
   "Hello #{params}!"
 end
 
+#returns interested events for user
 get '/users/:user_id/interested' do
-	#returns interested events for user
 	"interested events for #{params['user_id']}"
 end
 
+#returns events created by user
 get '/users/:user_id/created' do
-	#returns events created by user
 	"events created by #{params['user_id']}"
 end
 
+# returns events rejected by user
 get '/users/:user_id/rejected' do
-	# returns events rejected by user
 	"events rejected by #{params['user_id']}"
 end
 
+#returns events confirmed by user
 get '/users/:user_id/confirmed' do
-	#returns events confirmed by user
 	"events confirmed by #{params['user_id']}"
 end
 
+# input: userId as http param under id
+# output: name, pic, created events, interested events, confirmed events, rejected events
 get '/users/:user_id' do
-	# input: userId as http param under id
-	# output: name, pic, created events, interested events, confirmed events, rejected events
 	"user for #{params['user_id']}"
 end
 
+# create a user with given id, pic, name
 post '/users' do #?id=12345&picture=xxxx.jpg&name=Xxx Xxx
-	# create a user with given id, pic, name
-	"create a user with id #{params['id']}, picture #{params['picture']}, name #{params['name']}"
+	users[params['id']] = User.new(params['id'], params['name'], params['picture'])
+	"created a user: #{users[params['id']].to_json}"
 end
 
 post '/events/:event_id/interested/:user_id' do
@@ -124,19 +103,24 @@ get '/events/:event_id' do
   "event for id #{params['event_id']}!"
 end
 
+# start_time is in seconds since the epoch; duration is in seconds; loc is a string description of location
+# metadata is anything
 post '/events' do 
 	# ?creator_id=12345&name=event name&description=event description&lat=30.0&lng=100.0&loc=4 main st
 	# start_time=1442689962&duration=3600&picture=asdf.jpg&metadata=...
-	# start_time is in seconds since the epoch; duration is in seconds; loc is a string description of location
-	# metadata is anything
-	"create an event by user: #{params['creator_id']}, name: #{params['name']}, description: #{params['description']}
-	lat: #{params['lat']}, lng: #{params['lng']}, location: #{params['loc']}, start_time: #{params['start_time']}
-	duration: #{params['duration']}, picture: #{params['picture']}"
+	if events.size == 0
+		id = 1
+	else
+		id = events.keys.max + 1
+	end
+	events[id] = Event.new(params['creator_id'], params['name'], params['description'], params['lat'], 
+		params['lng'], params['start_time'], params['duration'], params['picture'], params['metadata'], [], [])
+	"created event: #{events[id].to_json}"
 end
 
+# exclude rejected, confirmed, interested, created
+# output: all other events ordered by magic or location
 get '/events' do
-	# exclude rejected, confirmed, interested, created
-	# output: all other events ordered by magic or location
 	"all events"
 end
 
