@@ -5,3 +5,7 @@ deployed to:
 https://whispering-sea-15.herokuapp.com/hello
 e.g.
 https://whispering-sea-15.herokuapp.com/hello
+
+to deploy: 
+git push heroku master
+heroku open
