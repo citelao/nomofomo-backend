@@ -100,7 +100,7 @@ delete '/events/:event_id/confirmed/:user_id' do
 end
 
 get '/events/:event_id' do
-  "event for id #{params['event_id']}!"
+    events[Integer(params['event_id'])].to_json
 end
 
 # start_time is in seconds since the epoch; duration is in seconds; loc is a string description of location
