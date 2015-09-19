@@ -24,6 +24,14 @@ class Event
         	'metadata' => @metadata, 'interested_users' => @interested_users,'confirmed_users' => @confirmed_users}.to_json
     end
 
+    def add_interested_user(user_id)
+    	interested_users.push(user_id)
+    end
+
+    def add_confirmed_user(user_id)
+    	confirmed_users.push(user_id)
+    end
+
     def self.fake_events
     	# TODO, change the users 1 and 2 to real FB ids for real people
     	{

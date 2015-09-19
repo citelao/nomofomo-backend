@@ -45,28 +45,29 @@ end
 
 #returns interested events for user
 get '/users/:user_id/interested' do
-	"interested events for #{params['user_id']}"
+	user_interested_events[Integer(params['user_id'])]
 end
 
 #returns events created by user
 get '/users/:user_id/created' do
-	"events created by #{params['user_id']}"
+	user_created_events[Integer(params['user_id'])]
 end
 
 # returns events rejected by user
 get '/users/:user_id/rejected' do
-	"events rejected by #{params['user_id']}"
+	user_disliked_events[Integer(params['user_id'])]
 end
 
 #returns events confirmed by user
 get '/users/:user_id/confirmed' do
-	"events confirmed by #{params['user_id']}"
+	user_confirmed_events[Integer(params['user_id'])]
 end
 
 # input: userId as http param under id
 # output: name, pic, created events, interested events, confirmed events, rejected events
+# TODO make sure to update their created, interested, confirmed, rejected upon create/interested/confirm/reject
 get '/users/:user_id' do
-	"user for #{params['user_id']}"
+	users[Integer(params['user_id'])]
 end
 
 # create a user with given id, pic, name
