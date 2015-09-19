@@ -1,0 +1,19 @@
+post event
+	input: [userId (facebook), event name, event description, location, time, picture, metadata]
+
+get user
+	input: userid
+	output: created events, interested events, confirmed events, rejected events
+
+get events
+	input: userid (optional)
+	# exclude rejected, confirmed, interested, created
+	output: all other events
+
+post event/event_id/interested
+	input: userid
+	# sets the even to be interested by the user
+
+post event/event_id/interested
+	input: userid
+	# sets the even to be interested by the user

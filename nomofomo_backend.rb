@@ -1,4 +1,3 @@
-# myapp.rb
 require 'sinatra'
 require 'sinatra/cross_origin'
 
@@ -12,6 +11,12 @@ set :allow_credentials, true
 set :max_age, "1728000"
 set :expose_headers, ['Content-Type']
 
+options "*" do
+  response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
+  response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+  200
+end
+
 # map from event id -> [name, minAttendance, hostUserId, yelpid]
 events = {1 => ["dinner @ the Lockhart", 3, 5, 13246]}
 
@@ -23,6 +28,8 @@ user_left_swipes = {}
 
 # map from hashed fb id -> array of their confirmed event ids
 user_confirmed_events = {}
+
+
 
 get '/hello' do
   url = params[:url]
