@@ -27,18 +27,6 @@ users = User.fake_users
 # map of eventid -> event
 events = Event.fake_events
 
-# map from hashed fb id -> array of their created event ids
-user_created_events = {}
-
-# map from hashed fb id -> array of their interested (right swiped) event ids
-user_interested_events = {}
-
-# map from hashed fb id -> array of their left swiped (dismissed) event ids
-user_disliked_events = {}
-
-# map from hashed fb id -> array of their confirmed event ids
-user_confirmed_events = {}
-
 get '/hello' do
   url = params[:url]
   "Hello #{params}!"
@@ -46,22 +34,22 @@ end
 
 #returns interested events for user
 get '/users/:user_id/interested' do
-	user_interested_events[Integer(params['user_id'])]
+	users[Integer(params['user_id'])].interested_event_ids.uniq.to_json
 end
 
 #returns events created by user
 get '/users/:user_id/created' do
-	user_created_events[Integer(params['user_id'])]
+	users[Integer(params['user_id'])].created_event_ids.uniq.to_json
 end
 
 # returns events rejected by user
 get '/users/:user_id/rejected' do
-	user_disliked_events[Integer(params['user_id'])]
+	users[Integer(params['user_id'])].rejected_event_ids.uniq.to_json
 end
 
 #returns events confirmed by user
 get '/users/:user_id/confirmed' do
-	user_confirmed_events[Integer(params['user_id'])]
+	users[Integer(params['user_id'])].confirmed_event_ids.uniq.to_json
 end
 
 # input: userId as http param under id
@@ -88,7 +76,7 @@ post '/events/:event_id/rejected/:user_id' do
 	user_id = Integer(params['user_id'])
 	event_id = Integer(params['event_id'])
 	users[user_id].set_rejected(event_id)
-	events[event_id].add_disliked_user(user_id)
+	events[event_id].add_rejected_user(user_id)
 	"user #{params['user_id']} rejected event #{params['event_id']}"
 end
 
@@ -130,13 +118,13 @@ get '/events/by_id/:event_id' do
 end
 
 # all events that the user should see in their feed #
-# excluding disliked, interested, created and confirmed
+# excluding rejected, interested, created and confirmed
 get '/events/:user_id' do
 	user_id = Integer(params['user_id'])
 	result = "["
-    events.values.each { |event|
-    	if not event.is_creator(user_id) and not event.is_interested(user_id) and not event.is_confirmed(user_id) and not event.is_disliked(user_id)
-	    	result += event.to_json + ","
+    events.values.each { |e|
+    	if not e.is_creator(user_id) and not e.is_interested(user_id) and not e.is_confirmed(user_id) and not e.is_rejected(user_id)
+	    	result += e.to_json + ","
 	    end
     }
 	if result[result.size - 1] == ","
@@ -158,6 +146,7 @@ post '/events' do
 	events[id] = Event.new(id, Integer(params['creator_id']), params['name'], params['description'],
 		params['lat'], params['lng'], params['loc'], params['start_time'], params['duration'],
 		params['picture'], params['min_attendance'], params['metadata'], [], [], [])
+	users[Integer(params['creator_id'])].create_event(id)
 	"created event: #{events[id].to_json}"
 end
 
