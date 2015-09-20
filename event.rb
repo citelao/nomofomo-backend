@@ -22,7 +22,7 @@ class Event
 
 	def to_json
         {'id' => @id, 'creator' => @creator, 'name' => @name, 'description' => @description,
-        	'lat' => @lat, 'lng' => @lng, 'start_time' => @start_time, 'duration' => @duration,'picture' => @picture,
+        	'lat' => @lat, 'lng' => @lng, 'address' => @location, 'start_time' => @start_time, 'duration' => @duration, 'picture' => @picture,
         	'min_attendance' => @min_attendance, 'metadata' => @metadata, 'interested_users' => @interested_users, 
         	'confirmed_users' => @confirmed_users, 'rejected_users' => @rejected_users}.to_json
     end
@@ -85,7 +85,7 @@ class Event
     			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", 2, "", [2], [], []),
      		5 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
     			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
-    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", 2, "", [3], [], []),
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "https://wisconsinbeerrunner.files.wordpress.com/2011/04/img_0114.jpg", 2, "", [3], [], []),
     		6 => Event.new(6, 1, "Grab a Greek for lunch", description_text, 43.471836, -80.538897,
 				"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
     			DateTime.now.to_time.to_i + 30 * 60, 3, "http://watcard.uwaterloo.ca/images/logos/grabagreek.jpg", 2, "", [1], [], []),
@@ -106,7 +106,7 @@ class Event
     			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", 2, "", [2], [], []),
      		12 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
     			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
-    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", 2, "", [3], [], []),
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "https://wisconsinbeerrunner.files.wordpress.com/2011/04/img_0114.jpg", 2, "", [3], [], []),
     		13 => Event.new(6, 1, "Grab a Greek for lunch", description_text, 43.471836, -80.538897,
 				"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
     			DateTime.now.to_time.to_i + 2.5 * 60 * 60, 3, "http://watcard.uwaterloo.ca/images/logos/grabagreek.jpg", 2, "", [1], [], []),
@@ -127,7 +127,7 @@ class Event
     			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", 2, "", [2], [], []),
      		19 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
     			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
-    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", 2, "", [3], [], []),
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "https://wisconsinbeerrunner.files.wordpress.com/2011/04/img_0114.jpg", 2, "", [3], [], []),
     		20 => Event.new(6, 1, "Grab a Greek for lunch", description_text, 43.471836, -80.538897,
 				"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
 				DateTime.now.to_time.to_i + 30 * 60, 3, "http://watcard.uwaterloo.ca/images/logos/grabagreek.jpg", 2, "", [1], [], []),
