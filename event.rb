@@ -68,14 +68,73 @@ class Event
 	end
 
     def self.fake_events
+    	description_text = "Lorem ipsum dolor sit amet, vero mazim vis ne, per option disputando no. In vim stet simul dicunt. Ei eos perpetua philosophia, est id agam eros iuvaret, vide placerat ne mei. Propriae disputando duo no. Per et doctus tibique prodesset."
     	# TODO, change the users 1 and 2 to real FB ids for real people
     	{
-    		1 => Event.new(1, 1, "Grab dinner at @ Pita Factory", "this place looks awesome", 43.471856, -80.538886,
+    		1 => Event.new(1, 1, "Grab dinner at @ Pita Factory", description_text, 43.471856, -80.538886,
     			"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
-    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "http://365-kw.com/wp-content/uploads/2010/10/Picture23-1.png", 2, "", [], [], []),
-    		2 => Event.new(2, 2, "study group @ EC5", "Let's meet up and study tonight :)", 43.472974, -80.540043,
+    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "http://365-kw.com/wp-content/uploads/2010/10/Picture23-1.png", 2, "", [1], [], []),
+    		2 => Event.new(2, 2, "study group @ EC5", description_text, 43.472974, -80.540043,
     			"200 University Ave W Waterloo, ON N2L 3E9 Canada",
-    			DateTime.now.to_time.to_i, 60 * 60 * 4, "http://i.imgur.com/8LLjKh8.jpg", 3, "", [], [], [])
+    			DateTime.now.to_time.to_i, 60 * 60 * 4, "http://i.imgur.com/8LLjKh8.jpg", 3, "", [2], [], [])
+    		3 => Event.new(3, 3, "Movie tonight", description_text, 43.466914, -80.523434,
+    			"6 Princess St W Waterloo, ON N2L 2X8 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "http://www.thecord.ca/wp-content/uploads/2012/09/Princess-MeganCherniak-colour.jpg", [3], [], [])
+    		4 => Event.new(4, 2, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [2], [], [])
+     		5 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
+    			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", [3], [], [])\
+    		6 => Event.new(6, 1, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2.5 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [1], [], [])
+    		7 => Event.new(7, 3, "Let's go on a hike", description_text, 43.456395, -80.406017,
+    			"Breslau, ON N0B 1M0 Canada",
+    			DateTime.now.to_time.to_i + 3.2 * 60 * 60, 3, "http://www.torontohiking.com/tohi/images/articles/mainhw/L25H_IMG_4053.jpg", [3], [], [])
+    		8 => Event.new(1, 1, "Grab dinner at @ Pita Factory", description_text, 43.471856, -80.538886,
+    			"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
+    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "http://365-kw.com/wp-content/uploads/2010/10/Picture23-1.png", 2, "", [1], [], []),
+    		9 => Event.new(2, 2, "study group @ EC5", description_text, 43.472974, -80.540043,
+    			"200 University Ave W Waterloo, ON N2L 3E9 Canada",
+    			DateTime.now.to_time.to_i, 60 * 60 * 4, "http://i.imgur.com/8LLjKh8.jpg", 3, "", [2], [], [])
+    		10 => Event.new(3, 3, "Movie tonight", description_text, 43.466914, -80.523434,
+    			"6 Princess St W Waterloo, ON N2L 2X8 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "http://www.thecord.ca/wp-content/uploads/2012/09/Princess-MeganCherniak-colour.jpg", [3], [], [])
+    		11 => Event.new(4, 2, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [2], [], [])
+     		12 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
+    			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", [3], [], [])\
+    		13 => Event.new(6, 1, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2.5 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [1], [], [])
+    		14 => Event.new(7, 3, "Let's go on a hike", description_text, 43.456395, -80.406017,
+    			"Breslau, ON N0B 1M0 Canada",
+    			DateTime.now.to_time.to_i + 3.2 * 60 * 60, 3, "http://www.torontohiking.com/tohi/images/articles/mainhw/L25H_IMG_4053.jpg", [3], [], [])
+    		15 => Event.new(1, 1, "Grab dinner at @ Pita Factory", description_text, 43.471856, -80.538886,
+    			"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
+    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "http://365-kw.com/wp-content/uploads/2010/10/Picture23-1.png", 2, "", [1], [], []),
+    		16 => Event.new(2, 2, "study group @ EC5", description_text, 43.472974, -80.540043,
+    			"200 University Ave W Waterloo, ON N2L 3E9 Canada",
+    			DateTime.now.to_time.to_i, 60 * 60 * 4, "http://i.imgur.com/8LLjKh8.jpg", 3, "", [2], [], [])
+    		17 => Event.new(3, 3, "Movie tonight", description_text, 43.466914, -80.523434,
+    			"6 Princess St W Waterloo, ON N2L 2X8 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "http://www.thecord.ca/wp-content/uploads/2012/09/Princess-MeganCherniak-colour.jpg", [3], [], [])
+    		18 => Event.new(4, 2, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [2], [], [])
+     		19 => Event.new(5, 3, "Rock climbing!", description_text, 43.441376, -80.475130,
+    			"50 Borden Ave S #1, Kitchener, ON N2G 3R5, Canada",
+    			DateTime.now.to_time.to_i + 3 * 60 * 60, 3, "http://www.bloomu.edu/sites/default/files/images/RecWall2.jpg", [3], [], [])\
+    		20 => Event.new(6, 1, "Coffee & chat?", description_text, 43.471361, -80.534711
+    			"108 Seagram Dr Waterloo, ON N2L 3G1 Canada",
+    			DateTime.now.to_time.to_i + 2.5 * 60 * 60, 3, "https://upload.wikimedia.org/wikipedia/commons/9/91/Tim_Hortons_US_Logo.jpg", [1], [], [])
+    		21 => Event.new(7, 3, "Let's go on a hike", description_text, 43.456395, -80.406017,
+    			"Breslau, ON N0B 1M0 Canada",
+    			DateTime.now.to_time.to_i + 3.2 * 60 * 60, 3, "http://www.torontohiking.com/tohi/images/articles/mainhw/L25H_IMG_4053.jpg", [3], [], [])
+
     	}
     end
 end
