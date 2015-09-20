@@ -133,13 +133,16 @@ end
 # excluding disliked, interested, created and confirmed
 get '/events/:user_id' do
 	user_id = Integer(params['user_id'])
-    result = []
+	result = "["
     events.values.each { |event|
     	if not event.is_creator(user_id) and not event.is_interested(user_id) and not event.is_confirmed(user_id) and not event.is_disliked(user_id)
-	    	result.push(event.to_json)
+	    	result += event.to_json + ","
 	    end
     }
-    result
+	if result[result.size - 1] == ","
+    	result = result[0..result.size - 2]
+    end
+    result + "]"
 end
 
 # start_time is in seconds since the epoch; duration is in seconds;
@@ -161,10 +164,13 @@ end
 # exclude rejected, confirmed, interested, created
 # output: all other events ordered by magic or location
 get '/events' do
-result = []
+	result = "["
     events.values.each { |event|
-	   result.push(event.to_json)
+	   result += event.to_json + ","
     }
-    result
+    if result[result.size - 1] == ","
+    	result = result[0..result.size - 2]
+    end
+    result + "]"
 end
 
