@@ -55,7 +55,18 @@ end
 # input: userId as http param under id
 # output: name, pic, created events, interested events, confirmed events, rejected events
 get '/users/:user_id' do
-	users[Integer(params['user_id'])]
+	users[Integer(params['user_id'])].to_json
+end
+
+get '/users' do
+	result = "["
+    users.values.each { |user|
+	   result += user.to_json + ","
+    }
+    if result[result.size - 1] == ","
+    	result = result[0..result.size - 2]
+    end
+    result + "]"
 end
 
 # create a user with given id, pic, name
