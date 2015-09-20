@@ -72,7 +72,7 @@ class Event
     	{
     		1 => Event.new(1, 1, "Grab dinner at @ Pita Factory", "this place looks awesome", 43.471856, -80.538886,
     			"170 University Avenue W Waterloo, ON N2L 3E9 Canada",
-    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "img", 2, "", [], [], []),
+    			DateTime.now.to_time.to_i + 60 * 60, 60 * 60, "http://365-kw.com/wp-content/uploads/2010/10/Picture23-1.png", 2, "", [], [], []),
     		2 => Event.new(2, 2, "study group @ EC5", "Let's meet up and study tonight :)", 43.472974, -80.540043,
     			"200 University Ave W Waterloo, ON N2L 3E9 Canada",
     			DateTime.now.to_time.to_i, 60 * 60 * 4, "http://i.imgur.com/8LLjKh8.jpg", 3, "", [], [], [])
