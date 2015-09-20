@@ -71,8 +71,8 @@ end
 
 # create a user with given id, pic, name
 post '/users' do #?id=12345&picture=xxxx.jpg&name=Xxx Xxx
-	users[Integer(params['id'])] = User.new(params['id'], params['name'], params['picture'])
-	"created a user: #{users[params['id']].to_json}"
+	users[Integer(params['id'])] = User.new(params['id'], params['name'], params['picture'], [])
+	"created a user: #{users[Integer(params['id'])].to_json}"
 end
 
 post '/events/:event_id/interested/:user_id' do
