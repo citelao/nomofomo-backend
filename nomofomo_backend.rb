@@ -71,8 +71,13 @@ end
 
 # create a user with given id, pic, name
 post '/users' do #?id=12345&picture=xxxx.jpg&name=Xxx Xxx
-	users[Integer(params['id'])] = User.new(params['id'], params['name'], params['picture'], [])
-	"created a user: #{users[Integer(params['id'])].to_json}"
+	id = Integer(params['id'])
+	unless users.include? id
+		users[id] = User.new(params['id'], params['name'], params['picture'], [])
+		"created a user: #{users[Integer(params['id'])].to_json}"
+	else
+		"user already exists"
+	end
 end
 
 post '/events/:event_id/interested/:user_id' do
